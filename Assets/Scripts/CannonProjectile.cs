@@ -39,12 +39,11 @@ public class CannonProjectile : MonoBehaviour, IPoolable
             yield return null;
         }
         Active = false;
-        ApplicationController.Instance.Events.OnCannonProjectileEvent?.Invoke(this, new KeyValuePair<CannonObject, bool>(_data, false));
+        ApplicationController.Instance.Managers.EventManager.OnCannonProjectileEvent?.Invoke(this, new KeyValuePair<CannonObject, bool>(_data, _deflected));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         _deflected = true;
-        ApplicationController.Instance.Events.OnCannonProjectileEvent?.Invoke(this, new KeyValuePair<CannonObject, bool>(_data, true));
     }
 }

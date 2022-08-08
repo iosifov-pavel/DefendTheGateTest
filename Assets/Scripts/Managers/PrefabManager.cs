@@ -12,14 +12,14 @@ public class PrefabManager : MonoBehaviour
     [SerializeField]
     private CannonProjectile _projectilePrefab;
     [SerializeField]
-    private Player _playerPrefab;
+    private PlayerController _playerPrefab;
     [SerializeField]
     private CannonObject[] _presets;
 
     public Cannon Cannon => _cannonPrefab;
     public BoxCollider2D Gate => _gatePrefab;
     public CannonProjectile Projectile => _projectilePrefab;
-    public Player Player => _playerPrefab;
+    public PlayerController Player => _playerPrefab;
 
     public CannonObject GetCannonObject(ObjectType type)
     {

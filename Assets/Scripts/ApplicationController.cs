@@ -11,17 +11,17 @@ public class ApplicationController : MonoBehaviour
     private Transform _poolHolder;
 
     private Constants _constants;
-    private LevelController _currentLevel;
-    private EventManager _eventManager;
+    private LevelController _currentLevelController;
+    private PlayerData _playerData;
 
-    public LevelController CurrentLevel
+    public LevelController LevelController
     {
-        get => _currentLevel;
-        set => _currentLevel = value;
+        get => _currentLevelController;
+        set => _currentLevelController = value;
     }
     public Managers Managers => _managers;
     public Constants Constants => _constants;
-    public EventManager Events => _eventManager;
+    public PlayerData PlayerData => _playerData;
 
     private void Awake()
     {
@@ -41,8 +41,9 @@ public class ApplicationController : MonoBehaviour
     private void InitManagers()
     {
         _managers = Instantiate(_managers, transform);
+        _managers.Initialize();
         _constants = new Constants();
-        _eventManager = new EventManager();
+        _playerData = new PlayerData();
         ObjectPool.Setup(_poolHolder);
     }
 }

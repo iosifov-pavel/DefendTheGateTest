@@ -34,7 +34,7 @@ public class Cannon : MonoBehaviour
     {
         var projectile = ObjectPool.GetObject(ApplicationController.Instance.Managers.PrefabManager.Projectile, ObjectType.Ball, _shootPoint.position, Quaternion.identity);
         projectile.Active = true;
-        var targetPosition = ApplicationController.Instance.CurrentLevel.CalculateShootTarget();
+        var targetPosition = ApplicationController.Instance.LevelController.CalculateShootTarget();
         transform.up = (targetPosition - (Vector2)transform.position).normalized;
         projectile.Setup(ChooseProjectile(), ApplicationController.Instance.Constants.BaseFlyTime, targetPosition);
     }
@@ -42,7 +42,7 @@ public class Cannon : MonoBehaviour
     private CannonObject ChooseProjectile()
     {
         var chance = Random.Range(0f, 1f);
-        var targetType = chance <= 0.4f ? ObjectType.Ball : chance <= 0.7f ? ObjectType.Bomb : ObjectType.Coin;
+        var targetType = chance <= 0.5f ? ObjectType.Ball : chance <= 0.75f ? ObjectType.Bomb : ObjectType.Coin;
         var projectile = ApplicationController.Instance.Managers.PrefabManager.GetCannonObject(targetType);
         return projectile;
     }
