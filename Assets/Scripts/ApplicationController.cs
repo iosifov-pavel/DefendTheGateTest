@@ -11,8 +11,13 @@ public class ApplicationController : MonoBehaviour
     private Transform _poolHolder;
 
     private Constants _constants;
+    private LevelController _currentLevel;
 
-
+    public LevelController CurrentLevel
+    {
+        get => _currentLevel;
+        set => _currentLevel = value;
+    }
     public Managers Managers => _managers;
     public Constants Constants => _constants;
 

@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6754105ec355846880c5a1f734761c, type: 3}
   m_Name: L1
   m_EditorClassIdentifier: 
-  _gatePosition: {x: 0, y: -1}
+  _gatePosition: {x: 0, y: -1, z: 0}
   _gateSize: {x: 10, y: 5}
   _cannonPositions:
-  - {x: -5, y: 5}
+  - {x: -5, y: 5, z: 0}
+  - {x: 5, y: 5, z: 0}

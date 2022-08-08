@@ -32,9 +32,17 @@ public class Cannon : MonoBehaviour
 
     private void Shoot()
     {
-        //var projectile = ObjectPool.GetObject<CannonProjectile>(ApplicationController.Instance.Managers.PrefabManager.Projectile, ObjectType.Ball, _shootPoint.position, Quaternion.identity);
-        //projectile.Active = true;
+        var projectile = ObjectPool.GetObject(ApplicationController.Instance.Managers.PrefabManager.Projectile, ObjectType.Ball, _shootPoint.position, Quaternion.identity);
+        projectile.Active = true;
         Debug.Log("PIU");
-        //projectile.Setup()
+        var targetPosition = ApplicationController.Instance.CurrentLevel.CalculateShootTarget();
+        transform.up = (targetPosition - (Vector2)transform.position).normalized;
+        projectile.Setup(ChooseProjectile(), ApplicationController.Instance.Constants.BaseFlyTime, targetPosition);
+    }
+
+    private CannonObject ChooseProjectile()
+    {
+        var projectile = ApplicationController.Instance.Managers.PrefabManager.GetCannonObject(ObjectType.Ball);
+        return projectile;
     }
 }
