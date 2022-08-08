@@ -41,6 +41,7 @@ public class LevelController : MonoBehaviour
     private void CreatePlayer()
     {
         _player = Instantiate(ApplicationController.Instance.Managers.PrefabManager.Player, _gates.transform.position, Quaternion.identity);
+        _player.Setup();
     }
 
     private void CreateGates()

@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2267193588529706422}
   - component: {fileID: 2267193588529706425}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bound
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -68,7 +68,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2267193588840220387}
   - component: {fileID: 2267193588840220386}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bound (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2267193589080650942}
   - component: {fileID: 2267193589080650913}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bound (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -185,7 +185,7 @@ GameObject:
   - component: {fileID: 2267193589318904327}
   - component: {fileID: 2267193589318904324}
   - component: {fileID: 682503615360729392}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -295,7 +295,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2267193589945350565}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bounds
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -331,7 +331,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2267193590275975878}
   - component: {fileID: 2267193590275975881}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Bound (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}

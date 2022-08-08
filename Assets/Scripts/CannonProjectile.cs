@@ -18,6 +18,8 @@ public class CannonProjectile : MonoBehaviour, IPoolable
 
     public void Setup(CannonObject data, float flyTime, Vector2 flyPosition)
     {
+        _target.gameObject.SetActive(data.Type == ObjectType.Ball);
+        _deflected = false;
         _target.position = flyPosition;
         _body.position = transform.position;
         _data = data;
@@ -37,5 +39,12 @@ public class CannonProjectile : MonoBehaviour, IPoolable
             yield return null;
         }
         Active = false;
+        ApplicationController.Instance.Events.OnCannonProjectileEvent?.Invoke(this, new KeyValuePair<CannonObject, bool>(_data, false));
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        _deflected = true;
+        ApplicationController.Instance.Events.OnCannonProjectileEvent?.Invoke(this, new KeyValuePair<CannonObject, bool>(_data, true));
     }
 }

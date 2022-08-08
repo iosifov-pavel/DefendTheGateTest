@@ -12,6 +12,7 @@ public class ApplicationController : MonoBehaviour
 
     private Constants _constants;
     private LevelController _currentLevel;
+    private EventManager _eventManager;
 
     public LevelController CurrentLevel
     {
@@ -20,6 +21,7 @@ public class ApplicationController : MonoBehaviour
     }
     public Managers Managers => _managers;
     public Constants Constants => _constants;
+    public EventManager Events => _eventManager;
 
     private void Awake()
     {
@@ -38,8 +40,9 @@ public class ApplicationController : MonoBehaviour
 
     private void InitManagers()
     {
-        _managers = Instantiate<Managers>(_managers, transform);
+        _managers = Instantiate(_managers, transform);
         _constants = new Constants();
+        _eventManager = new EventManager();
         ObjectPool.Setup(_poolHolder);
     }
 }
