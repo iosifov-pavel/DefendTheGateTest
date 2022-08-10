@@ -12,11 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4e6754105ec355846880c5a1f734761c, type: 3}
   m_Name: L1
   m_EditorClassIdentifier: 
+  _levelIndex: 0
+  _levelBuyCost: 0
   _levelName: Level 1
   _levelTime: 120
-  _winScore: 15
-  _gatePosition: {x: 0, y: -1, z: 0}
-  _gateSize: {x: 8, y: 5}
+  _winScore: 8
+  _maxScore: 10
+  _gatePosition: {x: 0, y: -2, z: 0}
+  _gateSize: {x: 5, y: 5}
   _cannonPositions:
-  - {x: -5, y: 5, z: 0}
-  - {x: 5, y: 5, z: 0}
+  - {x: -2, y: 5, z: 0}
+  - {x: 2, y: 5, z: 0}

@@ -13,12 +13,14 @@ MonoBehaviour:
   m_Name: L2
   m_EditorClassIdentifier: 
   _levelIndex: 1
+  _levelBuyCost: 0
   _levelName: Level 2
   _levelTime: 100
-  _winScore: 18
-  _gatePosition: {x: 0, y: -1, z: 0}
-  _gateSize: {x: 9, y: 5}
+  _winScore: 12
+  _maxScore: 13
+  _gatePosition: {x: 0, y: -2, z: 0}
+  _gateSize: {x: 6, y: 5}
   _cannonPositions:
-  - {x: -5, y: 5, z: 0}
-  - {x: 5, y: 5, z: 0}
+  - {x: -2, y: 5, z: 0}
+  - {x: 2, y: 5, z: 0}
   - {x: 0, y: 5, z: 0}

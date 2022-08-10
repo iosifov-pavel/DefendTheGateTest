@@ -3,12 +3,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using uRandom = UnityEngine.Random;
+using uMath = UnityEngine.Mathf;
 
 public class LevelController : MonoBehaviour
 {
-    [SerializeField]
     private LevelData _levelData;
-
     private BoxCollider2D _gates;
     private PlayerController _player;
     private int _score;
@@ -32,6 +31,30 @@ public class LevelController : MonoBehaviour
         CreateGates();
         CreatePlayer();
         CreateCannons();
+        StartTimer();
+    }
+
+    private void StartTimer()
+    {
+        StartCoroutine(TimerRoutine());
+    }
+
+    private IEnumerator TimerRoutine()
+    {
+        var timer = _levelData.LevelTime;
+        var diff = 0f;
+        while(timer > 0)
+        {
+            diff += Time.deltaTime;
+            if(diff >= 1)
+            {
+                timer--;
+                diff = 0;
+                ApplicationController.Instance.Managers.EventManager.OnLevelTimerUpdate?.Invoke(this, timer);
+            }
+            yield return null;
+        }
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp?.Invoke(this, EventArgs.Empty);
     }
 
     private void CreateCannons()
@@ -56,9 +79,10 @@ public class LevelController : MonoBehaviour
 
     public Vector2 CalculateShootTarget()
     {
-        var posX = uRandom.Range(_gates.transform.position.x - _gates.bounds.extents.x, _gates.transform.position.x + _gates.bounds.extents.x);
-        var posY = uRandom.Range(_gates.transform.position.y - _gates.bounds.extents.y, _gates.transform.position.y + _gates.bounds.extents.y);
-        return new Vector2(posX,posY);
+        var offset = ApplicationController.Instance.Constants.GatePositionOffset;
+        var posX = uRandom.Range(_gates.transform.position.x - _gates.bounds.extents.x + offset, _gates.transform.position.x + _gates.bounds.extents.x - offset);
+        var posY = uRandom.Range(_gates.transform.position.y - _gates.bounds.extents.y + offset, _gates.transform.position.y + _gates.bounds.extents.y - offset);
+        return new Vector2(posX, posY);
     }
 
     private void ProjectilesHandler(object sender, KeyValuePair<CannonObject, bool> data)
@@ -68,23 +92,23 @@ public class LevelController : MonoBehaviour
             case ObjectType.Ball:
                 if (data.Value)
                 {
-                    UpdateScore(1);
+                    UpdateScore(data.Key.ScoreChange);
                 }
                 else
                 {
-                    UpdateScore(-1);
+                    UpdateScore(-data.Key.ScoreChange);
                 }
                 break;
             case ObjectType.Bomb:
                 if (data.Value)
                 {
-                    UpdateScore(-2);
+                    UpdateScore(-data.Key.ScoreChange);
                 }
                 break;
             case ObjectType.Coin:
                 if (data.Value)
                 {
-                    UpdateCoins(1);
+                    UpdateCoins(data.Key.ScoreChange);
                 }
                 break;
         }
@@ -92,12 +116,13 @@ public class LevelController : MonoBehaviour
 
     private void UpdateScore(int scoreChange)
     {
-        _score = (int)MathF.Max(0, _score + scoreChange);
-        Debug.Log(_score);
+        _score = (int)uMath.Clamp(_score + scoreChange, 0, _levelData.MaxScore);
+        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Ball, _score));
     }
 
     private void UpdateCoins(int coinsChange)
     {
         _coins = (int)MathF.Max(0, _coins + coinsChange);
+        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Coin, _coins));
     }
 }

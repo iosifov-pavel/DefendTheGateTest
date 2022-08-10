@@ -41,7 +41,7 @@ public class Cannon : MonoBehaviour
         transform.up = (targetPosition - (Vector2)transform.position).normalized;
         var baseFlyTime = ApplicationController.Instance.Constants.BaseFlyTime;
         var randomModifier = ApplicationController.Instance.Constants.FlyRandomModifier;
-        var flyTime = Random.Range(baseFlyTime - randomModifier, baseFlyTime + randomModifier);
+        var flyTime = Random.Range(baseFlyTime - randomModifier, baseFlyTime);
         projectile.Setup(ChooseProjectile(), flyTime, targetPosition);
     }
 

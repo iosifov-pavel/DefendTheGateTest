@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectSprite: {fileID: 21300000, guid: 36082751c7a171340b4c0c69ac1032b7, type: 3}
   _type: 0
+  _scoreChange: 1
