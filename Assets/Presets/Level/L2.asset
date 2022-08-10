@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: L2
   m_EditorClassIdentifier: 
   _levelIndex: 1
-  _levelBuyCost: 0
+  _levelBuyCost: 15
   _levelName: Level 2
   _levelTime: 100
   _winScore: 12

@@ -19,6 +19,12 @@ public class LevelScreen : MonoBehaviour
     private RectTransform _winScoreLine;
     [SerializeField]
     private TMP_Text _winScoreText;
+    [SerializeField]
+    private GameObject _endLevelWindow;
+    [SerializeField]
+    private TMP_Text _endLevelText;
+    [SerializeField]
+    private Button _okButton;
 
     private LevelData _data;
 
@@ -30,25 +36,10 @@ public class LevelScreen : MonoBehaviour
         ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp += EndLevel;
     }
 
-    private void EndLevel(object sender, EventArgs e)
-    {
-
-    }
-
-    private void UpdateUI(object sender, KeyValuePair<ObjectType, int> state)
-    {
-        if (state.Key == ObjectType.Ball)
-        {
-            UpdateProgressBar(state.Value);
-        }
-        else
-        {
-            _coinsCount.text = state.Value.ToString();
-        }
-    }
-
     public void Setup(LevelData data)
     {
+        _endLevelWindow.SetActive(false);
+        _okButton.onClick.AddListener(GoToMainMenu);
         _data = data;
         UpdateTimer(this, _data.LevelTime);
         SetScoreRequirements();
@@ -78,5 +69,31 @@ public class LevelScreen : MonoBehaviour
     {
         var newScale = Mathf.Clamp(score / _data.MaxScore, 0, 1);
         _progressBarFiller.localScale = new Vector3(_progressBar.localScale.x, newScale, _progressBar.localScale.z);
+    }
+
+    private void EndLevel(object sender, bool succsess)
+    {
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerUpdate -= UpdateTimer;
+        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState -= UpdateUI;
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp -= EndLevel;
+        _endLevelText.text = succsess ? ApplicationController.Instance.Constants.winTextKey : ApplicationController.Instance.Constants.loseTextKey;
+        _endLevelWindow.SetActive(true);
+    }
+
+    private void UpdateUI(object sender, KeyValuePair<ObjectType, int> state)
+    {
+        if (state.Key == ObjectType.Ball)
+        {
+            UpdateProgressBar(state.Value);
+        }
+        else
+        {
+            _coinsCount.text = state.Value.ToString();
+        }
+    }
+
+    private void GoToMainMenu()
+    {
+        ApplicationController.Instance.Managers.SceneManager.LoadMainMenu();
     }
 }

@@ -12,9 +12,16 @@ public class Cannon : MonoBehaviour
 
     public void Setup(float initialSecondsPerShoot)
     {
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp += StopShooting;
         _initialSecondsPerShoot = initialSecondsPerShoot;
         _secondsPerShoot = GetShootTime();
         StartCoroutine(ShootRoutine());
+    }
+
+    private void StopShooting(object sender, bool e)
+    {
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp -= StopShooting;
+        StopAllCoroutines();
     }
 
     private IEnumerator ShootRoutine()

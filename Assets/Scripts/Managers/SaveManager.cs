@@ -11,7 +11,12 @@ public class SaveManager
     public void Initialize()
     {
         _data = new PlayerData();
-        _data.AvaliableLevels.Add(1);
+        _data.AvaliableLevels.Add(0);
+    }
+
+    public void UpdatePlayerCoins(int coins)
+    {
+        _data.UpdateCoins(coins);
     }
 }
 

@@ -43,10 +43,10 @@ public class LevelController : MonoBehaviour
     {
         var timer = _levelData.LevelTime;
         var diff = 0f;
-        while(timer > 0)
+        while (timer > 0)
         {
             diff += Time.deltaTime;
-            if(diff >= 1)
+            if (diff >= 1)
             {
                 timer--;
                 diff = 0;
@@ -54,7 +54,17 @@ public class LevelController : MonoBehaviour
             }
             yield return null;
         }
-        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp?.Invoke(this, EventArgs.Empty);
+        EndLevel();
+    }
+
+    private void EndLevel()
+    {
+        var succsess = _score >= _levelData.WinScore;
+        if(succsess)
+        {
+            ApplicationController.Instance.Managers.SaveManager.UpdatePlayerCoins(_coins);
+        }
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp?.Invoke(this, succsess);
     }
 
     private void CreateCannons()

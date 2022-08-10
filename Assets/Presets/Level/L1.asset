@@ -15,7 +15,7 @@ MonoBehaviour:
   _levelIndex: 0
   _levelBuyCost: 0
   _levelName: Level 1
-  _levelTime: 120
+  _levelTime: 30
   _winScore: 8
   _maxScore: 10
   _gatePosition: {x: 0, y: -2, z: 0}

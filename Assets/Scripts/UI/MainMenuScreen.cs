@@ -19,7 +19,7 @@ public class MainMenuScreen : MonoBehaviour
         var levels = ApplicationController.Instance.Managers.LevelManager.Levels;
         foreach( var level in levels )
         {
-            var levelIndex = levels.IndexOf(level)+1;
+            var levelIndex = levels.IndexOf(level);
             var isLevelAvaliable = ApplicationController.Instance.Managers.SaveManager.PlayerData.IsLevelAvaliable(levelIndex);
             isLevelAvaliable |= level.LevelBuyCost == 0;  
             var levelPicker = Instantiate(ApplicationController.Instance.Managers.PrefabManager.LevelPicker, _levelScroll.content);

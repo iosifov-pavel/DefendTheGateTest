@@ -9,8 +9,25 @@ public class PlayerController : MonoBehaviour
 
     private bool _mousePressed;
     private bool _hasPlayer;
+    private bool _endLevel;
+
+    private void Awake()
+    {
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp += OnEndLevel;
+    }
+
+    private void OnEndLevel(object sender, bool e)
+    {
+        ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp -= OnEndLevel;
+        StopAllCoroutines();
+        _endLevel = true;
+    }
     void Update()
     {
+        if(_endLevel)
+        {
+            return;
+        }
         _mousePressed = Input.GetMouseButton(0);
         if(!_mousePressed)
         {
