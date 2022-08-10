@@ -12,7 +12,6 @@ public class ApplicationController : MonoBehaviour
 
     private Constants _constants;
     private LevelController _currentLevelController;
-    private PlayerData _playerData;
 
     public LevelController LevelController
     {
@@ -21,7 +20,6 @@ public class ApplicationController : MonoBehaviour
     }
     public Managers Managers => _managers;
     public Constants Constants => _constants;
-    public PlayerData PlayerData => _playerData;
 
     private void Awake()
     {
@@ -43,7 +41,6 @@ public class ApplicationController : MonoBehaviour
         _managers = Instantiate(_managers, transform);
         _managers.Initialize();
         _constants = new Constants();
-        _playerData = new PlayerData();
         ObjectPool.Setup(_poolHolder);
     }
 }

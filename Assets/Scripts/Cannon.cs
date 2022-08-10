@@ -7,11 +7,13 @@ public class Cannon : MonoBehaviour
     [SerializeField]
     private Transform _shootPoint;
 
+    private float _initialSecondsPerShoot;
     private float _secondsPerShoot;
 
-    public void Setup(float secondsPerShoot)
+    public void Setup(float initialSecondsPerShoot)
     {
-        _secondsPerShoot = secondsPerShoot;
+        _initialSecondsPerShoot = initialSecondsPerShoot;
+        _secondsPerShoot = GetShootTime();
         StartCoroutine(ShootRoutine());
     }
 
@@ -24,6 +26,7 @@ public class Cannon : MonoBehaviour
             if(timer >= _secondsPerShoot)
             {
                 Shoot();
+                _secondsPerShoot = GetShootTime();
                 timer = 0;
             }
             yield return null;
@@ -36,7 +39,10 @@ public class Cannon : MonoBehaviour
         projectile.Active = true;
         var targetPosition = ApplicationController.Instance.LevelController.CalculateShootTarget();
         transform.up = (targetPosition - (Vector2)transform.position).normalized;
-        projectile.Setup(ChooseProjectile(), ApplicationController.Instance.Constants.BaseFlyTime, targetPosition);
+        var baseFlyTime = ApplicationController.Instance.Constants.BaseFlyTime;
+        var randomModifier = ApplicationController.Instance.Constants.FlyRandomModifier;
+        var flyTime = Random.Range(baseFlyTime - randomModifier, baseFlyTime + randomModifier);
+        projectile.Setup(ChooseProjectile(), flyTime, targetPosition);
     }
 
     private CannonObject ChooseProjectile()
@@ -45,5 +51,10 @@ public class Cannon : MonoBehaviour
         var targetType = chance <= 0.5f ? ObjectType.Ball : chance <= 0.75f ? ObjectType.Bomb : ObjectType.Coin;
         var projectile = ApplicationController.Instance.Managers.PrefabManager.GetCannonObject(targetType);
         return projectile;
+    }
+
+    private float GetShootTime()
+    {
+        return Random.Range(_initialSecondsPerShoot - ApplicationController.Instance.Constants.FlyRandomModifier, _initialSecondsPerShoot + ApplicationController.Instance.Constants.FlyRandomModifier);
     }
 }

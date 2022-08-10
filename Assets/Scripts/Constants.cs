@@ -5,5 +5,6 @@ using UnityEngine;
 public class Constants
 {
     public readonly float CannonShootCooldown = 2f;
-    public readonly float BaseFlyTime = 2f;
+    public readonly float BaseFlyTime = 1.75f;
+    public readonly float FlyRandomModifier = 1f;
 }

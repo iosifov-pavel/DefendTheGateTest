@@ -14,10 +14,10 @@ public class LevelController : MonoBehaviour
     private int _score;
     private int _coins;
 
-    private void Start()
+    private void Awake()
     {
-        Setup(_levelData);
         ApplicationController.Instance.LevelController = this;
+        Setup(ApplicationController.Instance.Managers.LevelManager.CurrentLevel);
     }
 
     public void Setup(LevelData data)

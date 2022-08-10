@@ -8,11 +8,15 @@ public class LevelData : ScriptableObject
     [SerializeField]
     private int _levelIndex;
     [SerializeField]
+    private int _levelBuyCost;
+    [SerializeField]
     private string _levelName;
     [SerializeField]
     private float _levelTime;
     [SerializeField]
     private int _winScore;
+    [SerializeField]
+    private int _maxScore;
     [SerializeField]
     private Vector3 _gatePosition;
     [SerializeField]
@@ -26,5 +30,7 @@ public class LevelData : ScriptableObject
     public string LevelName => _levelName;
     public float LevelTime => _levelTime;
     public int WinScore => _winScore;
+    public int MaxScore => _maxScore;
     public int LevelIndex => _levelIndex;
+    public int LevelBuyCost => _levelBuyCost;
 }
