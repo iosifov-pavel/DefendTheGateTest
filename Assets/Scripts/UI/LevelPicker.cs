@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
 public class LevelPicker : MonoBehaviour
 {
@@ -36,7 +33,7 @@ public class LevelPicker : MonoBehaviour
 
     private void PickerAction()
     {
-        if(_avaliable)
+        if (_avaliable)
         {
             PlayLevel();
         }
@@ -49,7 +46,7 @@ public class LevelPicker : MonoBehaviour
     private void BuyLevel()
     {
         var playerCoins = ApplicationController.Instance.Managers.SaveManager.PlayerData.Coins;
-        if(playerCoins < _levelData.LevelBuyCost)
+        if (playerCoins < _levelData.LevelBuyCost)
         {
             return;
         }

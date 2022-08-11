@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -91,7 +90,7 @@ public struct PlayerData
     {
         get
         {
-            if(_avaliableLevels == null)
+            if (_avaliableLevels == null)
             {
                 _avaliableLevels = new List<int>();
             }
@@ -106,7 +105,7 @@ public struct PlayerData
 
     public void SetLevelAvaliable(int levelIndex, int coinsCost)
     {
-        if(_avaliableLevels.Contains(levelIndex))
+        if (_avaliableLevels.Contains(levelIndex))
         {
             return;
         }

@@ -2,8 +2,8 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using uRandom = UnityEngine.Random;
 using uMath = UnityEngine.Mathf;
+using uRandom = UnityEngine.Random;
 
 public class LevelController : MonoBehaviour
 {
@@ -60,7 +60,7 @@ public class LevelController : MonoBehaviour
     private void EndLevel()
     {
         var succsess = _score >= _levelData.WinScore;
-        if(succsess)
+        if (succsess)
         {
             ApplicationController.Instance.Managers.SaveManager.UpdatePlayerCoins(_coins);
             ApplicationController.Instance.Managers.SaveManager.Save();

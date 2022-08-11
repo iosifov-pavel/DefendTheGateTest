@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -24,20 +23,20 @@ public class PlayerController : MonoBehaviour
     }
     void Update()
     {
-        if(_endLevel)
+        if (_endLevel)
         {
             return;
         }
         _mousePressed = Input.GetMouseButton(0) || Input.touchCount > 0;
-        if(!_mousePressed)
+        if (!_mousePressed)
         {
-            if(_hasPlayer)
+            if (_hasPlayer)
             {
                 _hasPlayer = false;
             }
             return;
         }
-        if(_hasPlayer)
+        if (_hasPlayer)
         {
             return;
         }
@@ -59,7 +58,7 @@ public class PlayerController : MonoBehaviour
 #endif
         var hit = Physics2D.Raycast(controlPosition, Vector3.forward, 100f, _playerLayers);
         _hasPlayer = hit.collider != null;
-        if(_hasPlayer)
+        if (_hasPlayer)
         {
             playerPart = hit.collider.attachedRigidbody;
         }
@@ -68,7 +67,7 @@ public class PlayerController : MonoBehaviour
 
     private IEnumerator MovePlayer(Rigidbody2D player)
     {
-        while(_mousePressed && _hasPlayer)
+        while (_mousePressed && _hasPlayer)
         {
             Vector3 controlPosition = Vector3.zero;
 #if UNITY_EDITOR

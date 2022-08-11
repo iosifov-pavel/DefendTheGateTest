@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cannon : MonoBehaviour
@@ -27,10 +26,10 @@ public class Cannon : MonoBehaviour
     private IEnumerator ShootRoutine()
     {
         var timer = 0f;
-        while(true)
+        while (true)
         {
             timer += Time.deltaTime;
-            if(timer >= _secondsPerShoot)
+            if (timer >= _secondsPerShoot)
             {
                 Shoot();
                 _secondsPerShoot = GetShootTime();
@@ -54,6 +53,8 @@ public class Cannon : MonoBehaviour
 
     private CannonObject ChooseProjectile()
     {
+        // тут можно было бы прикрутить шансы спавна разных объектов к данным уровня, но я решил оставить это в таком виде, так как в целом
+        // нужные задачи такой разброс выполняет на базовом уровне
         var chance = Random.Range(0f, 1f);
         var targetType = chance <= 0.5f ? ObjectType.Ball : chance <= 0.75f ? ObjectType.Bomb : ObjectType.Coin;
         var projectile = ApplicationController.Instance.Managers.PrefabManager.GetCannonObject(targetType);

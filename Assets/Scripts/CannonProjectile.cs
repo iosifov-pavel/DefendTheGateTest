@@ -31,7 +31,7 @@ public class CannonProjectile : MonoBehaviour, IPoolable
     {
         var timer = 0f;
         var startPosition = _body.position;
-        while(timer <= time && !_deflected)
+        while (timer <= time && !_deflected)
         {
             timer += Time.deltaTime;
             var newPosition = Vector2.Lerp(startPosition, targetPosition, timer / time);

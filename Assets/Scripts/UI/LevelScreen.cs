@@ -1,9 +1,8 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
-using UnityEngine.UI;
 using System;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class LevelScreen : MonoBehaviour
 {
@@ -56,7 +55,7 @@ public class LevelScreen : MonoBehaviour
     {
         _winScoreText.text = _data.WinScore.ToString();
         var progressBarSize = _progressBar.rect.height;
-        var scale = _data.WinScore / (float) _data.MaxScore;
+        var scale = _data.WinScore / (float)_data.MaxScore;
         _winScoreLine.anchoredPosition = new Vector2(_winScoreLine.anchoredPosition.x, progressBarSize * scale);
     }
 
@@ -103,7 +102,7 @@ public class LevelScreen : MonoBehaviour
         var minutes = (int)seconds / 60;
         var hours = minutes / 60;
         string resultString = null;
-        if(hours == 0)
+        if (hours == 0)
         {
             resultString = String.Format("{0:0#}:{1:0#}", minutes - 60 * hours, seconds - minutes * 60);
         }
