@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
         {
             return;
         }
-        _mousePressed = Input.GetMouseButton(0);
+        _mousePressed = Input.GetMouseButton(0) || Input.touchCount > 0;
         if(!_mousePressed)
         {
             if(_hasPlayer)
@@ -51,8 +51,13 @@ public class PlayerController : MonoBehaviour
     {
         _hasPlayer = false;
         playerPart = null;
-        var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        var hit = Physics2D.Raycast(mousePosition, Vector3.forward, 100f, _playerLayers);
+        Vector3 controlPosition = Vector3.zero;
+#if UNITY_EDITOR
+        controlPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+#elif UNITY_ANDROID
+        controlPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+#endif
+        var hit = Physics2D.Raycast(controlPosition, Vector3.forward, 100f, _playerLayers);
         _hasPlayer = hit.collider != null;
         if(_hasPlayer)
         {
@@ -65,8 +70,13 @@ public class PlayerController : MonoBehaviour
     {
         while(_mousePressed && _hasPlayer)
         {
-            var mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            player.MovePosition(new Vector3(mousePosition.x, mousePosition.y));
+            Vector3 controlPosition = Vector3.zero;
+#if UNITY_EDITOR
+            controlPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+#elif UNITY_ANDROID
+        controlPosition = Camera.main.ScreenToWorldPoint(Input.touches[0].position);
+#endif
+            player.MovePosition(new Vector3(controlPosition.x, controlPosition.y));
             yield return null;
         }
     }
