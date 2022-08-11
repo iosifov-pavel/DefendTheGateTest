@@ -18,6 +18,12 @@ public class SaveManager
     {
         _data.UpdateCoins(coins);
     }
+
+    public void SetLevelAvaliable(int index, int coinsCost)
+    {
+        _data.SetLevelAvaliable(index, coinsCost);
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Coin, _data.Coins));
+    }
 }
 
 [System.Serializable]

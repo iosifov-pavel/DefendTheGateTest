@@ -3,15 +3,36 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class MainMenuScreen : MonoBehaviour
 {
     [SerializeField]
     private ScrollRect _levelScroll;
+    [SerializeField]
+    private TMP_Text _playerCoins;
+
 
     private void Awake()
     {
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState += SetCoins;
         FillWithLevels();
+        SetCoins(ApplicationController.Instance.Managers.SaveManager.PlayerData.Coins);
+    }
+
+    private void OnDestroy()
+    {
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState -= SetCoins;
+    }
+
+    private void SetCoins(object sender, KeyValuePair<ObjectType, int> state)
+    {
+        SetCoins(state.Value);
+    }
+
+    private void SetCoins(int coins)
+    {
+        _playerCoins.text = coins.ToString();
     }
 
     private void FillWithLevels()

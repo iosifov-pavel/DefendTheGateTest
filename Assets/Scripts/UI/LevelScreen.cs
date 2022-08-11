@@ -32,7 +32,7 @@ public class LevelScreen : MonoBehaviour
     {
         Setup(ApplicationController.Instance.Managers.LevelManager.CurrentLevel);
         ApplicationController.Instance.Managers.EventManager.OnLevelTimerUpdate += UpdateTimer;
-        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState += UpdateUI;
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState += UpdateUI;
         ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp += EndLevel;
     }
 
@@ -62,7 +62,7 @@ public class LevelScreen : MonoBehaviour
 
     private void UpdateTimer(object sender, float timerValue)
     {
-        _timer.text = timerValue.ToString();
+        _timer.text = GetFormattedTime(timerValue);
     }
 
     private void UpdateProgressBar(float score)
@@ -74,7 +74,7 @@ public class LevelScreen : MonoBehaviour
     private void EndLevel(object sender, bool succsess)
     {
         ApplicationController.Instance.Managers.EventManager.OnLevelTimerUpdate -= UpdateTimer;
-        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState -= UpdateUI;
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState -= UpdateUI;
         ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp -= EndLevel;
         _endLevelText.text = succsess ? ApplicationController.Instance.Constants.winTextKey : ApplicationController.Instance.Constants.loseTextKey;
         _endLevelWindow.SetActive(true);
@@ -95,5 +95,22 @@ public class LevelScreen : MonoBehaviour
     private void GoToMainMenu()
     {
         ApplicationController.Instance.Managers.SceneManager.LoadMainMenu();
+    }
+
+
+    private string GetFormattedTime(float seconds)
+    {
+        var minutes = (int)seconds / 60;
+        var hours = minutes / 60;
+        string resultString = null;
+        if(hours == 0)
+        {
+            resultString = String.Format("{0:0#}:{1:0#}", minutes - 60 * hours, seconds - minutes * 60);
+        }
+        else
+        {
+            resultString = String.Format("{0:0#}:{1:0#}:{2:0#}", hours, minutes - 60 * hours, seconds - minutes * 60);
+        }
+        return resultString;
     }
 }

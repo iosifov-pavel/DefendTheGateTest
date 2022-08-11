@@ -127,12 +127,12 @@ public class LevelController : MonoBehaviour
     private void UpdateScore(int scoreChange)
     {
         _score = (int)uMath.Clamp(_score + scoreChange, 0, _levelData.MaxScore);
-        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Ball, _score));
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Ball, _score));
     }
 
     private void UpdateCoins(int coinsChange)
     {
         _coins = (int)MathF.Max(0, _coins + coinsChange);
-        ApplicationController.Instance.Managers.EventManager.OnUpdateLevelState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Coin, _coins));
+        ApplicationController.Instance.Managers.EventManager.OnUpdatePlayerState?.Invoke(this, new KeyValuePair<ObjectType, int>(ObjectType.Coin, _coins));
     }
 }

@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e6754105ec355846880c5a1f734761c, type: 3}
-  m_Name: L1
+  m_Name: L3
   m_EditorClassIdentifier: 
-  _levelIndex: 0
-  _levelBuyCost: 0
-  _levelName: Level 1
-  _levelTime: 30
-  _winScore: 6
-  _maxScore: 10
-  _gatePosition: {x: 0, y: -2, z: 0}
-  _gateSize: {x: 5, y: 5}
+  _levelIndex: 2
+  _levelBuyCost: 10
+  _levelName: Level3
+  _levelTime: 45
+  _winScore: 11
+  _maxScore: 11
+  _gatePosition: {x: 1, y: -2, z: 0}
+  _gateSize: {x: 5, y: 4}
   _cannonPositions:
-  - {x: -2, y: 5, z: 0}
-  - {x: 2, y: 5, z: 0}
+  - {x: -2, y: 4, z: 0}
+  - {x: -1, y: 4, z: 0}
+  - {x: 0, y: 4, z: 0}
