@@ -39,6 +39,7 @@ public class LevelPicker : MonoBehaviour
             return;
         }
         ApplicationController.Instance.Managers.SaveManager.PlayerData.SetLevelAvaliable(_levelData.LevelIndex, _levelData.LevelBuyCost);
+        _avaliable = true;
     }
 
     private void PlayLevel()
