@@ -38,9 +38,9 @@ public class ApplicationController : MonoBehaviour
 
     private void InitManagers()
     {
+        _constants = new Constants();
         _managers = Instantiate(_managers, transform);
         _managers.Initialize();
-        _constants = new Constants();
         ObjectPool.Setup(_poolHolder);
     }
 }

@@ -54,6 +54,7 @@ public class LevelPicker : MonoBehaviour
             return;
         }
         ApplicationController.Instance.Managers.SaveManager.SetLevelAvaliable(_levelData.LevelIndex, _levelData.LevelBuyCost);
+        ApplicationController.Instance.Managers.SaveManager.Save();
         SetAvaliableView(true);
     }
 

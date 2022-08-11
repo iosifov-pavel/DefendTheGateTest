@@ -24,7 +24,7 @@ public class Managers : MonoBehaviour
     public void Initialize()
     {
         _saveManager = new SaveManager();
-        _saveManager.Initialize();
         _eventManager = new EventManager();
+        _saveManager.Initialize();
     }
 }

@@ -63,6 +63,7 @@ public class LevelController : MonoBehaviour
         if(succsess)
         {
             ApplicationController.Instance.Managers.SaveManager.UpdatePlayerCoins(_coins);
+            ApplicationController.Instance.Managers.SaveManager.Save();
         }
         ApplicationController.Instance.Managers.EventManager.OnLevelTimerIsUp?.Invoke(this, succsess);
     }
